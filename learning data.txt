@@ -1,0 +1,76 @@
+ds = ingest_data(r"E:\Job Important Documents\Projects\FloatChat\Float_Data\01Jan\20250101_prof.nc")
+PARAS=ds["STATION_PARAMETERS"].values
+# print(PARAS.shape)
+# print(ds.data_vars)
+# print(ds["PRES"][0].values)
+# for var in ds.variables:
+#     print(var, ds[var].shape)
+
+# print("Float:", ds["PLATFORM_NUMBER"][0].values.astype(str))
+# print("Cycle:", ds["CYCLE_NUMBER"][0].values)
+# print("Lat:", ds["LATITUDE"][0].values)
+# print("Lon:", ds["LONGITUDE"][0].values)
+
+# print("Pressure:", ds["PRES"][0][:10].values)
+# print("Temp:", ds["TEMP"][0][:10].values)
+# print("Salinity:", ds["PSAL"][0][:10].values)
+
+# print(ds["PRES"].values[0][:20])
+# print(ds["TEMP"].values[0][:20])
+# print(ds["PSAL"].values[0][:20])
+
+# pres=ds["PRES"][0].values
+# valid_pres = pres[~np.isnan(pres)]
+# print("Number of measurements:", len(valid_pres))
+# print("Maximum pressure:", np.max(valid_pres))
+
+# print("Min Temp:", np.nanmin(ds["TEMP"][0].values))
+# print("Max Temp:", np.nanmax(ds["TEMP"][0].values))
+
+# print("Min Salinity:", np.nanmin(ds["PSAL"][0].values))
+# print("Max Salinity:", np.nanmax(ds["PSAL"][0].values))
+
+    
+df = pd.DataFrame(rows)
+print(df.shape)
+print(n_profiles)
+print(df.head())
+print(df.info())
+# print(ds["PLATFORM_NUMBER"].shape)
+# print(ds["CYCLE_NUMBER"].shape)
+# print(ds["LATITUDE"].shape)
+# print(ds["LONGITUDE"].shape)
+
+
+connection check 
+test_df = pd.DataFrame([
+    {
+        "source": "argo",
+        "platform_id": "5906527",
+        "cycle_number": 1,
+        "timestamp": pd.Timestamp("2025-01-01"),
+        "latitude": 10.5,
+        "longitude": 72.3,
+        "depth": 100.0,
+        "temperature": 20.5,
+        "salinity": 35.0,
+        "oxygen": None,
+        "chlorophyll": None
+    }
+])
+
+test_df.to_sql(
+    "ocean_measurements",
+    engine,
+    if_exists="append",
+    chunksize=5000,
+    method="multi",
+    index=False
+)
+
+check = pd.read_sql(
+    "SELECT COUNT(*) AS cnt FROM ocean_measurements",
+    engine
+)
+
+print(check)

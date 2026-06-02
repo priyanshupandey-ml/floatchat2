@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+myenv/
+venv/
+
+# ARGO datasets
+*.nc
+Float_Data/
+uploaded_data/
+
+# Install
+*.exe
+
+# Audio
+*.mp3
+audio_files/
+
+# Vector DBs
+chroma/
+chroma_db/
+faiss_index/
+vectorstore/
+.env
