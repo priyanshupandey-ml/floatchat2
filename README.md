@@ -128,7 +128,7 @@ Users can ask natural language questions such as:
 ## Installation
 
 ### 1. Clone Repository
-git clone https://github.com/your-username/floatchat.git
+git clone https://github.com/your-username/floatchat2.git
 cd floatchat
 ### 2. Install Dependencies
 pip install -r requirements.txt
